@@ -26,12 +26,14 @@ export function SearchForm({
     <form onSubmit={handleSubmit} className="flex flex-wrap gap-2">
       <input
         type="search"
+        aria-label="Buscar productos"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Buscar por nombre o SKU"
         className="flex-1 min-w-[200px] rounded-md border border-black/15 bg-transparent px-3 py-2 text-sm dark:border-white/15"
       />
       <select
+        aria-label="Ordenar productos"
         value={sort}
         onChange={(e) => setSort(e.target.value)}
         className="rounded-md border border-black/15 bg-transparent px-3 py-2 text-sm dark:border-white/15"

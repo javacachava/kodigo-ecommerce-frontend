@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart/cart-context";
 import { formatCurrency } from "@/lib/format";
@@ -25,10 +26,9 @@ export default function CartPage() {
       <ul className="flex flex-col divide-y divide-black/10 dark:divide-white/10">
         {items.map((item) => (
           <li key={item.productId} className="flex items-center gap-4 py-4">
-            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md bg-black/5 dark:bg-white/5">
+            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md bg-black/5 dark:bg-white/5">
               {item.imageUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={item.imageUrl} alt={item.name} className="h-full w-full object-cover" />
+                <Image src={item.imageUrl} alt={item.name} fill sizes="64px" className="object-cover" />
               ) : null}
             </div>
 

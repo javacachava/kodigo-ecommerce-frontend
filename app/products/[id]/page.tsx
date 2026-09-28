@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProduct } from "@/lib/api/products";
 import { ApiError } from "@/lib/api/errors";
@@ -23,10 +24,16 @@ export default async function ProductDetailPage({
 
   return (
     <div className="grid gap-8 sm:grid-cols-2">
-      <div className="aspect-square overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
+      <div className="relative aspect-square overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
         {product.image_url ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={product.image_url} alt={product.name} className="h-full w-full object-cover" />
+          <Image
+            src={product.image_url}
+            alt={product.name}
+            fill
+            priority
+            sizes="(min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-black/40 dark:text-white/40">
             Sin imagen

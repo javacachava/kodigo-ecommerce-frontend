@@ -115,17 +115,30 @@ npx tsc --noEmit  # chequeo de tipos
   (secciones pesadas que dependen de la API externa).
 - Errores 404/403 de la API se traducen a `notFound()` de Next.js.
 
-## Evidencia pendiente de captura manual
+## Evidencia de pruebas
 
-Estos entregables requieren interaccion manual con Swagger UI / Lighthouse y
-no se generan por codigo:
+Flujo completo verificado end-to-end con Playwright contra la API real
+(catalogo, busqueda, carrito, login, orden, pago rechazado + reintento exitoso,
+historial, proteccion de rutas, registro, aislamiento de datos entre
+usuarios). Capturas en [`docs/screenshots/`](docs/screenshots/).
 
-- Capturas de los endpoints consumidos desde Swagger (`../ecommerce-api`,
-  ver `/api/documentation`).
-- Capturas o grabacion del flujo de compra completo en el navegador.
-- Reporte Lighthouse: con la app en `npm run build && npm run start` y la API
-  arriba, corre `npx lighthouse http://localhost:3000/products --view` (o el
-  panel Lighthouse de Chrome DevTools) y adjunta el reporte generado.
+Reporte Lighthouse (build de produccion, `/products`) en
+[`docs/lighthouse/products-report.html`](docs/lighthouse/products-report.html):
+
+| Categoria | Puntaje |
+|---|---|
+| Performance | 90 |
+| Accessibility | 100 |
+| Best Practices | 100 |
+| SEO | 100 |
+
+Imagenes de producto migradas de `<img>` a `next/image` (con `remotePatterns`
+en `next.config.ts` para el host de imagenes de prueba) tras detectar un LCP
+de 5.1s en la primera corrida; bajo a 3.3s solo con esa optimizacion.
+
+Pendiente de captura manual (requiere Swagger UI abierto en el navegador):
+capturas de los endpoints consumidos desde `/api/documentation` en
+`../ecommerce-api`.
 
 ## Estructura relevante
 
